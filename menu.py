@@ -1,6 +1,8 @@
-import pygame, sys
+import pygame
+import sys
 from pygame.locals import *
 from classes import Button
+import client
 
 main_clock = pygame.time.Clock()
 
@@ -9,7 +11,7 @@ pygame.init()
 width = 500
 height = 500
 
-pygame.display.set_caption('Game Base')
+pygame.display.set_caption('Dodgeball')
 screen = pygame.display.set_mode((width, height))
 
 click = False
@@ -17,16 +19,15 @@ click = False
 bt_w = 100
 bt_h = 50
 
-
 def main_menu():
     while True:
 
         screen.fill((0, 0, 0))
 
-        btns = [Button("Main Menu", round(width/2) - bt_w/2, 20, bt_w, bt_h, (255, 255, 255)),
-                Button("Game", 20, 150, bt_w, bt_h, (255, 255, 255)),
-                Button("Options", 100, 150, bt_w, bt_h, (255, 255, 255)),
-                Button("Exit", 180, 150, bt_w, bt_h, (255, 255, 255))]
+        btns = [Button("DODGEBALL", round(width/2) - bt_w/2, 20, bt_w, bt_h, (0, 0, 0), 2),
+                Button("Game", 1*round(width/5) - bt_w/2, height-80, bt_w, bt_h, (255, 255, 255)),
+                Button("Options", 2.5*round(width/5) - bt_w/2, height-80, bt_w, bt_h, (255, 255, 255)),
+                Button("Exit", 4*round(width/5) - bt_w/2, height-80, bt_w, bt_h, (255, 255, 255))]
 
         for btn in btns:
             btn.draw(screen)
@@ -62,9 +63,9 @@ def game():
 
         screen.fill((0, 0, 0))
 
-        btns = [Button("Main Menu", round(width/2) - bt_w/2, 20, bt_w, bt_h, (255, 255, 255)),
-                Button("Join Room", 20, 150, bt_w, bt_h, (255, 255, 255)),
-                Button("Back", 100, 150, bt_w, bt_h, (255, 255, 255))]
+        btns = [Button("DODGEBALL", round(width/2) - bt_w/2, 20, bt_w, bt_h, (0, 0, 0), 2),
+                Button("Join Room", 1*round(width/3) - bt_w/2, height-80, bt_w, bt_h, (255, 255, 255)),
+                Button("Back", 2*round(width/3) - bt_w/2, height-80, bt_w, bt_h, (255, 255, 255))]
 
         for btn in btns:
             btn.draw(screen)
@@ -85,7 +86,7 @@ def game():
                         if btn.text == "Main Menu":
                             main_menu()
                         elif btn.text == "Join Room":
-                            print("Join Room")
+                            client.play(screen, width, height)
                         elif btn.text == "Back":
                             running = False
 
@@ -99,8 +100,8 @@ def options():
 
         screen.fill((0, 0, 0))
 
-        btns = [Button("Main Menu", round(width/2) - bt_w/2, 20, bt_w, bt_h, (255, 255, 255)),
-                Button("Back", 100, 150, bt_w, bt_h, (255, 255, 255))]
+        btns = [Button("DODGEBALL", round(width/2) - bt_w/2, 20, bt_w, bt_h, (0, 0, 0), 2),
+                Button("Back", round(width/2) - bt_w/2, height-80, bt_w, bt_h, (255, 255, 255))]
 
         for btn in btns:
             btn.draw(screen)

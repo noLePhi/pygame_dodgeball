@@ -2,19 +2,26 @@ import pygame
 
 pygame.font.init()
 font = pygame.font.SysFont(None, 20)
+font2 = pygame.font.SysFont("comicsans", 100)
 
 class Button:
-    def __init__(self, text, x, y, width, height, color):
+    def __init__(self, text, x, y, width, height, color, font=1):
         self.text = text
         self.x = x
         self.y = y
         self.width = width
         self.height = height
         self.color = color
+        if font == 1:
+            self.font = font
+            self.font_col = (0, 0, 0)
+        elif font == 2:
+            self.font = font2
+            self.font_col = (255, 255, 255)
 
     def draw(self, win):
         pygame.draw.rect(win, self.color, (self.x, self.y, self.width, self.height))
-        text = font.render(self.text, 1, (0, 0, 0))
+        text = font.render(self.text, 1, self.font_col)
         win.blit(text, (self.x + round(self.width/2) - round(text.get_width()/2),
                  self.y + round(self.height/2) - round(text.get_height()/2)))
 
@@ -26,3 +33,33 @@ class Button:
             return True
         else:
             return False
+
+class Player:
+    def __init__(self, x, y, width, height, color):
+        self.x = x
+        self.y = y
+        self.width = width
+        self.height = height
+        self.color = color
+        self.rect = (x, y, width, height)
+        self.vel = 3
+
+    def draw(self, win):
+        pygame.draw.rect(win, self.color, self.rect)
+
+    def move(self):
+        keys = pygame.key.get_pressed()
+
+        if keys[pygame.K_LEFT]:
+            self.x -= self.vel
+        if keys[pygame.K_RIGHT]:
+            self.x += self.vel
+        if keys[pygame.K_UP]:
+            self.y -= self.vel
+        if keys[pygame.K_DOWN]:
+            self.y += self.vel
+
+        self.update()
+
+    def update(self):
+        self.rect = (self.x, self.y, self.width, self.height)
