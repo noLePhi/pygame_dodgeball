@@ -7,8 +7,11 @@ pygame.init()
 pygame.font.init()
 font = pygame.font.SysFont(None, 20)
 
+width = 500
+height = 500
+
 pygame.display.set_caption('Game Base')
-screen = pygame.display.set_mode((500, 500), 0, 32)
+screen = pygame.display.set_mode((width, height))
 
 
 click = False
@@ -43,10 +46,13 @@ def main_menu():
 
         screen.fill((0, 0, 0))
 
-        btns = [Button("Main Menu", 20, 20, 70, 100, (255, 255, 255)),
-                Button("Game", 20, 100, 70, 100, (255, 255, 255)),
-                Button("Options", 100, 100, 70, 100, (255, 255, 255)),
-                Button("Exit", 180, 100, 70, 100, (255, 255, 255))]
+        bt_w = 100
+        bt_h = 50
+
+        btns = [Button("Main Menu", round(width/2) - bt_w/2, 20, bt_w, bt_h, (255, 255, 255)),
+                Button("Game", 20, 150, bt_w, bt_h, (255, 255, 255)),
+                Button("Options", 100, 150, bt_w, bt_h, (255, 255, 255)),
+                Button("Exit", 180, 150, bt_w, bt_h, (255, 255, 255))]
 
         for btn in btns:
             btn.draw(screen)
