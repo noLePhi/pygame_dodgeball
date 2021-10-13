@@ -30,8 +30,8 @@ def play(win, width, height):
 
     n = Network()
     start_pos = read_pos(n.get_pos())
-    p = Player(start_pos[0], start_pos[1], 100, 100, (0, 255, 0))
-    p2 = Player(0, 0, 100, 100, (255, 0, 0))
+    p = Player(start_pos[0], start_pos[1], 50, 50, (0, 255, 0))
+    p2 = Player(0, 0, 50, 50, (255, 0, 0))
     clock = pygame.time.Clock()
 
     btns = [Button("Exit", round(width-20) - bt_w/2, 20, bt_w/2, bt_h/2, (255, 255, 255))]
