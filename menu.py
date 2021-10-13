@@ -1,6 +1,8 @@
-import pygame, sys
+import pygame
+import sys
 from pygame.locals import *
 from classes import Button
+import client
 
 main_clock = pygame.time.Clock()
 
@@ -9,14 +11,13 @@ pygame.init()
 width = 500
 height = 500
 
-pygame.display.set_caption('Game Base')
+pygame.display.set_caption('Dodgeball')
 screen = pygame.display.set_mode((width, height))
 
 click = False
 
 bt_w = 100
 bt_h = 50
-
 
 def main_menu():
     while True:
@@ -85,7 +86,7 @@ def game():
                         if btn.text == "Main Menu":
                             main_menu()
                         elif btn.text == "Join Room":
-                            print("Join Room")
+                            client.play(screen)
                         elif btn.text == "Back":
                             running = False
 
