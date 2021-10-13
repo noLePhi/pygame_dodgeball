@@ -86,7 +86,7 @@ def game():
                         if btn.text == "Main Menu":
                             main_menu()
                         elif btn.text == "Join Room":
-                            client.play(screen)
+                            client.play(screen, width, height)
                         elif btn.text == "Back":
                             running = False
 
