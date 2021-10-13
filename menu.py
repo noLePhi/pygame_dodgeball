@@ -13,8 +13,10 @@ height = 500
 pygame.display.set_caption('Game Base')
 screen = pygame.display.set_mode((width, height))
 
-
 click = False
+
+bt_w = 100
+bt_h = 50
 
 class Button:
     def __init__(self, text, x, y, width, height, color):
@@ -46,9 +48,6 @@ def main_menu():
 
         screen.fill((0, 0, 0))
 
-        bt_w = 100
-        bt_h = 50
-
         btns = [Button("Main Menu", round(width/2) - bt_w/2, 20, bt_w, bt_h, (255, 255, 255)),
                 Button("Game", 20, 150, bt_w, bt_h, (255, 255, 255)),
                 Button("Options", 100, 150, bt_w, bt_h, (255, 255, 255)),
@@ -56,7 +55,9 @@ def main_menu():
 
         for btn in btns:
             btn.draw(screen)
+
         click = False
+
         for event in pygame.event.get():
             if event.type == QUIT:
                 pygame.quit()
@@ -73,6 +74,9 @@ def main_menu():
                             game()
                         elif btn.text == "Options":
                             options()
+                        elif btn.text == "Exit":
+                            pygame.quit()
+                            sys.exit()
 
         pygame.display.update()
         main_clock.tick(60)
@@ -80,9 +84,18 @@ def main_menu():
 def game():
     running = True
     while running:
+
         screen.fill((0, 0, 0))
 
-        # draw_text('game', font, (255, 255, 255), screen, 20, 20)
+        btns = [Button("Main Menu", round(width/2) - bt_w/2, 20, bt_w, bt_h, (255, 255, 255)),
+                Button("Join Room", 20, 150, bt_w, bt_h, (255, 255, 255)),
+                Button("Back", 100, 150, bt_w, bt_h, (255, 255, 255))]
+
+        for btn in btns:
+            btn.draw(screen)
+
+        click = False
+
         for event in pygame.event.get():
             if event.type == QUIT:
                 pygame.quit()
@@ -90,16 +103,35 @@ def game():
             if event.type == KEYDOWN:
                 if event.key == K_ESCAPE:
                     running = False
+            if event.type == MOUSEBUTTONDOWN:
+                mouse_pos = pygame.mouse.get_pos()
+                for btn in btns:
+                    if btn.click(mouse_pos):
+                        if btn.text == "Main Menu":
+                            main_menu()
+                        elif btn.text == "Join Room":
+                            print("Join Room")
+                        elif btn.text == "Back":
+                            running = False
 
         pygame.display.update()
         main_clock.tick(60)
 
 def options():
     running = True
+
     while running:
+
         screen.fill((0, 0, 0))
 
-        # draw_text('options', font, (255, 255, 255), screen, 20, 20)
+        btns = [Button("Main Menu", round(width/2) - bt_w/2, 20, bt_w, bt_h, (255, 255, 255)),
+                Button("Back", 100, 150, bt_w, bt_h, (255, 255, 255))]
+
+        for btn in btns:
+            btn.draw(screen)
+
+        click = False
+
         for event in pygame.event.get():
             if event.type == QUIT:
                 pygame.quit()
@@ -107,6 +139,14 @@ def options():
             if event.type == KEYDOWN:
                 if event.key == K_ESCAPE:
                     running = False
+            if event.type == MOUSEBUTTONDOWN:
+                mouse_pos = pygame.mouse.get_pos()
+                for btn in btns:
+                    if btn.click(mouse_pos):
+                        if btn.text == "Main Menu":
+                            main_menu()
+                        elif btn.text == "Back":
+                            running = False
 
         pygame.display.update()
         main_clock.tick(60)
